@@ -2,23 +2,23 @@
   "users": [
     {
       "id": "uuid1",
-      "name": "David2227"
+      "name": "David"
     },
     {
       "id": "uuid2",
-      "name": "Beckham5658"
+      "name": "Beckham"
     },
     {
       "id": "uuid3",
-      "name": "Jhon2025"
+      "name": "Jhon"
     },
     {
       "id": "uuid4",
-      "name": "Smith924"
+      "name": "Smith"
     },
     {
       "id": "uuid5",
-      "name": "Phone46"
+      "name": "Phone"
     }
   ],
   "requiredInfo": {
