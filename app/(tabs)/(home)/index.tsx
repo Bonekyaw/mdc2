@@ -5,12 +5,21 @@ import { Link, useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
 import Cart from "@/components/shop/Cart";
+import Title from "@/components/shop/Title";
+import {categories} from '@/data';
+import {FlashList} from "@shopify/flash-list";
+import Category from "@/components/shop/Category";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const [select, setSelect] = useState("uuid1");
+
+  const onSelectHandler = (id: string) => {
+    setSelect(id);
+  }
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -40,6 +49,18 @@ export default function HomeScreen() {
           contentFit="cover"
           transition={1000}
         />
+        <View style={{paddingLeft: 20}}>
+          <Title title="Shop By Category" actionText="See All"/>
+          <FlashList
+              data={categories}
+              extraData={select}
+              renderItem={({ item }) => <Category {...item} onSelect={onSelectHandler} select={select}/>}
+              estimatedItemSize={80}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+          />
+          <Title title="Recommended for You" actionText="See All"/>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
