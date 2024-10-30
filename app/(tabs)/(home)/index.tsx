@@ -6,8 +6,8 @@ import { Image } from "expo-image";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
-import {categories} from '@/data';
-import {FlashList} from "@shopify/flash-list";
+import { categories } from "@/data";
+import { FlashList } from "@shopify/flash-list";
 import Category from "@/components/shop/Category";
 
 const blurhash =
@@ -19,7 +19,7 @@ export default function HomeScreen() {
 
   const onSelectHandler = (id: string) => {
     setSelect(id);
-  }
+  };
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -49,17 +49,19 @@ export default function HomeScreen() {
           contentFit="cover"
           transition={1000}
         />
-        <View style={{paddingLeft: 20}}>
-          <Title title="Shop By Category" actionText="See All"/>
+        <View style={{ paddingLeft: 20 }}>
+          <Title title="Shop By Category" actionText="See All" />
           <FlashList
-              data={categories}
-              extraData={select}
-              renderItem={({ item }) => <Category {...item} onSelect={onSelectHandler} select={select}/>}
-              estimatedItemSize={80}
-              horizontal
-              showsHorizontalScrollIndicator={false}
+            data={categories}
+            extraData={select}
+            renderItem={({ item }) => (
+              <Category {...item} onSelect={onSelectHandler} select={select} />
+            )}
+            estimatedItemSize={80}
+            horizontal
+            showsHorizontalScrollIndicator={false}
           />
-          <Title title="Recommended for You" actionText="See All"/>
+          <Title title="Recommended for You" actionText="See All" />
         </View>
       </ScrollView>
     </SafeAreaView>
