@@ -45,7 +45,7 @@ export const products = [
     quantity: 136,
     price: 295.5,
     discount: 550,
-    image: "t1.png",
+    image: t1,
     favourite: true,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -59,7 +59,7 @@ export const products = [
     quantity: 201,
     price: 199.5,
     discount: 0,
-    image: "t3.png",
+    image: t3,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -73,7 +73,7 @@ export const products = [
     quantity: 127,
     price: 255,
     discount: 0,
-    image: "t2.png",
+    image: t2,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -87,7 +87,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "t4.png",
+    image: t4,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -101,7 +101,7 @@ export const products = [
     quantity: 136,
     price: 295,
     discount: 550,
-    image: "w1.png",
+    image: w1,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -115,7 +115,7 @@ export const products = [
     quantity: 127,
     price: 255,
     discount: 0,
-    image: "w2.png",
+    image: w2,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -129,7 +129,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "w4.png",
+    image: w4,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -143,7 +143,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "w5.png",
+    image: w5,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -157,7 +157,7 @@ export const products = [
     quantity: 136,
     price: 295.5,
     discount: 550,
-    image: "t1.png",
+    image: t1,
     favourite: true,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -171,7 +171,7 @@ export const products = [
     quantity: 201,
     price: 199.5,
     discount: 0,
-    image: "t3.png",
+    image: t3,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -185,7 +185,7 @@ export const products = [
     quantity: 127,
     price: 255,
     discount: 0,
-    image: "t2.png",
+    image: t2,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -199,7 +199,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "t4.png",
+    image: t4,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -213,7 +213,7 @@ export const products = [
     quantity: 136,
     price: 295,
     discount: 550,
-    image: "w1.png",
+    image: w1,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -227,7 +227,7 @@ export const products = [
     quantity: 127,
     price: 255,
     discount: 0,
-    image: "w2.png",
+    image: w2,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -241,7 +241,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "w4.png",
+    image: w4,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -255,7 +255,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "w5.png",
+    image: w5,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -269,7 +269,7 @@ export const products = [
     quantity: 127,
     price: 255,
     discount: 0,
-    image: "w2.png",
+    image: w2,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -283,7 +283,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "w4.png",
+    image: w4,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",
@@ -297,7 +297,7 @@ export const products = [
     quantity: 234,
     price: 220,
     discount: 0,
-    image: "w5.png",
+    image: w5,
     favourite: false,
     description:
       "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist.",

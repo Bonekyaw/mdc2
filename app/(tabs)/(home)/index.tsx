@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Text, StyleSheet, View, ScrollView, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, useNavigation } from "expo-router";
+import { Link, useNavigation, useRouter } from "expo-router";
 import { Image } from "expo-image";
+import { useScrollToTop } from "@react-navigation/native";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
-import { categories } from "@/data";
+import { categories, products } from "@/data";
 import { FlashList } from "@shopify/flash-list";
 import Category from "@/components/shop/Category";
+import Product from "@/components/shop/Product";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -16,19 +18,37 @@ const blurhash =
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [select, setSelect] = useState("uuid1");
+  const scrollRef = useRef<ScrollView>(null);
+  useScrollToTop(scrollRef);
+  const router = useRouter();
 
   const onSelectHandler = (id: string) => {
     setSelect(id);
   };
 
+  const productsList = products.filter(
+    (product) => product.categories_id === select
+  );
+
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
+  const onPressScroll = () => {
+    scrollRef.current?.scrollTo({
+      y: 0,
+      animated: true,
+    });
+  };
+
+  const goDetail = (id: string) => {
+    router.navigate(`/${id}`);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Pressable>
+        <Pressable onPress={onPressScroll}>
           <Image
             source={require("@/assets/images/n.png")}
             placeholder={{ blurhash }}
@@ -41,7 +61,7 @@ export default function HomeScreen() {
           <Cart />
         </Pressable>
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
         <Image
           source={require("@/assets/images/banner6.png")}
           placeholder={{ blurhash }}
@@ -62,6 +82,25 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
           />
           <Title title="Recommended for You" actionText="See All" />
+          <FlashList
+            data={productsList}
+            renderItem={({ item }) => (
+              <Product {...item} onCallRoute={goDetail} />
+            )}
+            estimatedItemSize={200}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+          <Title title="Popular Lists for You" actionText="See All" />
+          <FlashList
+            data={productsList}
+            renderItem={({ item }) => (
+              <Product {...item} onCallRoute={goDetail} />
+            )}
+            estimatedItemSize={200}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
