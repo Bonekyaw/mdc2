@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+// import { useLocalSearchParams } from "expo-router";
 
 const Detail = () => {
-  const { id } = useLocalSearchParams();
+  // const { id } = useLocalSearchParams();
   return (
     <View>
-      <Text>Detail screen {id}</Text>
+      <Text>Detail screen</Text>
     </View>
   );
 };

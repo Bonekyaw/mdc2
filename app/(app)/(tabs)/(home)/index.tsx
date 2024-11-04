@@ -42,7 +42,7 @@ export default function HomeScreen() {
   };
 
   const goDetail = (id: string) => {
-    router.navigate(`/${id}`);
+    router.navigate("/detail");
   };
 
   return (
