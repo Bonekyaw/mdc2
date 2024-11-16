@@ -5,10 +5,10 @@ import { store } from "@/services/redux/store";
 
 export default function Root() {
   return (
-    <Provider store={store}>
-      <SessionProvider>
-        <Slot />
-      </SessionProvider>
-    </Provider>
+    // <Provider store={store}>
+    <SessionProvider>
+      <Slot />
+    </SessionProvider>
+    // </Provider>
   );
 }

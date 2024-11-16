@@ -12,6 +12,8 @@ const Profile = () => {
       <Text>Profile Screen</Text>
       <Text
         onPress={() => {
+          console.log("Sign Out");
+
           // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
           signOut();
         }}

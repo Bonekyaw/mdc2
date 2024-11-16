@@ -22,3 +22,21 @@ export interface CategoryType {
   name: string;
   image: any;
 }
+
+export interface ColorType {
+  id: string;
+  name: string;
+  bgColor: string;
+  stock: boolean;
+}
+
+export interface SizeType {
+  id: string;
+  name: string;
+  stock: boolean;
+}
+
+export interface SampleType {
+  key: number;
+  image: string;
+}
