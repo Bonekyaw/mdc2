@@ -25,6 +25,8 @@ export const fetchRequiredInfo = createAsyncThunk(
     const response = await fetchApi("requiredInfo");
     if (!response) {
       return rejectWithValue("Network Connection failed. Please try again.");
+    } else if (response.error) {
+      return rejectWithValue(response.message);
     }
     return response;
   }

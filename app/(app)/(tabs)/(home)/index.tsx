@@ -7,10 +7,13 @@ import { useScrollToTop } from "@react-navigation/native";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
-import { categories, products } from "@/data";
+import { products } from "@/data";
 import { FlashList } from "@shopify/flash-list";
 import Category from "@/components/shop/Category";
 import Product from "@/components/shop/Product";
+import { useAppSelector, useAppDispatch } from "@/hooks/useRedux";
+import { fetchRequiredInfo } from "@/services/redux/requiredInfoSlice";
+import Toast from "react-native-root-toast";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -22,6 +25,32 @@ export default function HomeScreen() {
   useScrollToTop(scrollRef);
   const router = useRouter();
 
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector((state) => state.requiredInfo.categories);
+
+  const fetchInfo = async () => {
+    try {
+      await dispatch(fetchRequiredInfo()).unwrap();
+    } catch (error: any) {
+      Toast.show(error, { duration: Toast.durations.LONG });
+    }
+  };
+
+  if (categories.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Data Request has failed!</Text>
+        <Pressable style={styles.btnError} onPress={fetchInfo}>
+          <Text>Try again</Text>
+        </Pressable>
+      </View>
+    );
+  }
+
   const onSelectHandler = (id: string) => {
     setSelect(id);
   };
@@ -29,10 +58,6 @@ export default function HomeScreen() {
   const productsList = products.filter(
     (product) => product.categories_id === select
   );
-
-  useEffect(() => {
-    navigation.setOptions({ headerShown: false });
-  }, [navigation]);
 
   const onPressScroll = () => {
     scrollRef.current?.scrollTo({
@@ -126,5 +151,13 @@ const styles = StyleSheet.create({
   banner: {
     width: "100%",
     aspectRatio: 20 / 9,
+  },
+  btnError: {
+    marginTop: 12,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderColor: "black",
+    borderWidth: 0.5,
+    borderRadius: 5,
   },
 });
