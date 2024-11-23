@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, useNavigation, useRouter } from "expo-router";
 import { Image } from "expo-image";
 import { useScrollToTop } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
@@ -67,12 +68,13 @@ export default function HomeScreen() {
   };
 
   const goDetail = (id: string) => {
-    router.navigate("/detail");
+    router.navigate({ pathname: "/detail", params: { id } });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
+        <StatusBar style="dark" />
         <Pressable onPress={onPressScroll}>
           <Image
             source={require("@/assets/images/n.png")}
@@ -134,7 +136,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    minHeight: "100%",
     backgroundColor: "white",
   },
   headerContainer: {
