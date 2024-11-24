@@ -129,6 +129,7 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
           />
         </View>
+        <View style={{ marginBottom: 50 }} />
       </ScrollView>
     </SafeAreaView>
   );
