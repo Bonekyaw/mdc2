@@ -1,21 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchApi } from "@/api";
-import { CategoryType, ColorType, SizeType, SampleType } from "@/type";
+import { CategoryType } from "@/type";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface initialStateType {
   categories: CategoryType[];
-  colors: ColorType[];
-  sizes: SizeType[];
-  sample: SampleType[];
   isFetching: boolean;
 }
 
 const initialState: initialStateType = {
   categories: [],
-  colors: [],
-  sizes: [],
-  sample: [],
   isFetching: false,
 };
 
@@ -46,15 +40,9 @@ const requiredInfoSlice = createSlice({
         state,
         action: PayloadAction<{
           categories: CategoryType[];
-          colors: ColorType[];
-          sizes: SizeType[];
-          sample: SampleType[];
         }>
       ) => {
         state.categories = action.payload.categories;
-        state.colors = action.payload.colors;
-        state.sizes = action.payload.sizes;
-        state.sample = action.payload.sample;
         state.isFetching = false;
       }
     );

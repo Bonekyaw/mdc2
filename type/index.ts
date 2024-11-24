@@ -14,6 +14,8 @@ export interface ProductType {
   discount: number;
   image: any;
   favourite: boolean;
+  colors: ColorType[];
+  sizes: SizeType[];
   description: string;
 }
 

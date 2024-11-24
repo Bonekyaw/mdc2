@@ -169,6 +169,25 @@
       "discount": 550,
       "image": "t1.png",
       "favourite": true,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -182,6 +201,25 @@
       "discount": 0,
       "image": "t3.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -195,6 +233,25 @@
       "discount": 0,
       "image": "t2.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -208,6 +265,25 @@
       "discount": 0,
       "image": "t4.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -221,6 +297,25 @@
       "discount": 550,
       "image": "w1.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -234,6 +329,25 @@
       "discount": 0,
       "image": "w2.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -247,6 +361,25 @@
       "discount": 0,
       "image": "w4.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -260,6 +393,25 @@
       "discount": 0,
       "image": "w5.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -273,6 +425,25 @@
       "discount": 550,
       "image": "t1.png",
       "favourite": true,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -286,6 +457,25 @@
       "discount": 0,
       "image": "t3.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -299,6 +489,25 @@
       "discount": 0,
       "image": "t2.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -312,6 +521,25 @@
       "discount": 0,
       "image": "t4.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -325,6 +553,25 @@
       "discount": 550,
       "image": "w1.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -338,6 +585,25 @@
       "discount": 0,
       "image": "w2.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -351,6 +617,25 @@
       "discount": 0,
       "image": "w4.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -364,6 +649,25 @@
       "discount": 0,
       "image": "w5.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -377,6 +681,25 @@
       "discount": 0,
       "image": "w2.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -390,6 +713,25 @@
       "discount": 0,
       "image": "w4.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     },
     {
@@ -403,6 +745,25 @@
       "discount": 0,
       "image": "w5.png",
       "favourite": false,
+      "colors": [
+        { "id": "uuid1", "name": "black", "bgColor": "#000000", "stock": true },
+        { "id": "uuid2", "name": "blue", "bgColor": "#2B4CC3", "stock": true },
+        {
+          "id": "uuid3",
+          "name": "purple",
+          "bgColor": "#6680C2",
+          "stock": false
+        },
+        { "id": "uuid4", "name": "white", "bgColor": "#ffffff", "stock": true }
+      ],
+      "sizes": [
+        { "id": "uuid5", "name": "XS", "stock": false },
+        { "id": "uuid6", "name": "S", "stock": true },
+        { "id": "uuid7", "name": "M", "stock": true },
+        { "id": "uuid8", "name": "L", "stock": false },
+        { "id": "uuid9", "name": "XL", "stock": true },
+        { "id": "uuid10", "name": "XXL", "stock": true }
+      ],
       "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
     }
   ]
