@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-picker/picker": "2.9.0",
     "@react-navigation/native": "^7.0.0",
     "@reduxjs/toolkit": "^2.3.0",
     "@shopify/flash-list": "1.7.1",
@@ -43,8 +44,7 @@
     "react-native-screens": "~4.1.0",
     "react-native-web": "~0.19.13",
     "react-redux": "^9.1.2",
-    "@gorhom/bottom-sheet": "^5",
-    "@react-native-picker/picker": "2.9.0"
+    "@gorhom/bottom-sheet": "^5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

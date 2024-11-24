@@ -10,12 +10,11 @@ import {
 import { useLocalSearchParams, Stack } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import BottomSheet, {
-  BottomSheetFlashList,
+  //BottomSheetFlashList,
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { Picker } from "@react-native-picker/picker";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { products } from "@/data";
 import Cart from "@/components/shop/Cart";
@@ -159,22 +158,20 @@ const Detail = () => {
           <Text style={[styles.btnText, { color: "white" }]}>BUY NOW</Text>
         </Pressable>
       </View>
-      {/* <GestureHandlerRootView style={{ flex: 1 }}>
-        <BottomSheet
-          index={-1}
-          ref={bottomSheetRef}
-          snapPoints={snapPoints}
-          enablePanDownToClose
-          backgroundStyle={{ backgroundColor: "white" }}
-          //handleIndicatorStyle={{ backgroundColor: "white" }}
-          onChange={handleSheetChanges}
-          //enableDynamicSizing={false}
-        >
-          <BottomSheetView>
-            <Text>Awesome 🎉</Text>
-          </BottomSheetView>
-        </BottomSheet>
-      </GestureHandlerRootView> */}
+      <BottomSheet
+        index={-1}
+        ref={bottomSheetRef}
+        snapPoints={snapPoints}
+        enablePanDownToClose
+        backgroundStyle={{ backgroundColor: "white" }}
+        //handleIndicatorStyle={{ backgroundColor: "white" }}
+        onChange={handleSheetChanges}
+        //enableDynamicSizing={false}
+      >
+        <BottomSheetView>
+          <Text>Awesome 🎉</Text>
+        </BottomSheetView>
+      </BottomSheet>
     </View>
   );
 };
