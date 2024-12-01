@@ -26,7 +26,7 @@ import type { SizeType } from "@/type";
 const { width, height } = Dimensions.get("window");
 const Detail = () => {
   const { id } = useLocalSearchParams();
-  const product = products.find((product) => product.id === id);
+  const product = products.find((product) => product.id === +id);
   const [color, setColor] = useState();
   const [size, setSize] = useState();
   const [quantity, setQuantity] = useState(1);

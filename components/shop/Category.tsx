@@ -1,15 +1,15 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 import { Image } from "expo-image";
-import { API_URL } from "@/config";
+import { IMG_URL } from "@/config";
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 interface Props {
-  id: string;
+  id: number;
   name: string;
   image: any;
-  onSelect: (id: string) => void;
-  select: string;
+  onSelect: (id: number) => void;
+  select: number;
 }
 
 const Category = ({ id, name, image, onSelect, select }: Props) => {
@@ -17,7 +17,7 @@ const Category = ({ id, name, image, onSelect, select }: Props) => {
     <Pressable style={styles.container} onPress={() => onSelect(id)}>
       <Image
         style={[styles.image, select === id && styles.select]}
-        source={{ uri: API_URL + image }}
+        source={{ uri: IMG_URL + image }}
         placeholder={{ blurhash }}
         contentFit="cover"
         transition={1000}

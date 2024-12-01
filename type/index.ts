@@ -1,39 +1,38 @@
 export interface User {
   id: string;
-  name: string;
 }
 
 export interface ProductType {
-  id: string;
-  categories_id: string;
+  id: number;
+  categories_id: number;
   brand: string;
   title: string;
   star: number;
   quantity: number;
   price: number;
   discount: number;
-  image: any;
-  favourite: boolean;
+  image: string;
   colors: ColorType[];
   sizes: SizeType[];
+  user: User[];
   description: string;
 }
 
 export interface CategoryType {
-  id: string;
+  id: number;
   name: string;
   image: any;
 }
 
 export interface ColorType {
-  id: string;
+  id: number;
   name: string;
   bgColor: string;
   stock: boolean;
 }
 
 export interface SizeType {
-  id: string;
+  id: number;
   name: string;
   stock: boolean;
 }

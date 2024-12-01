@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String?
+  phone     String    @unique
+  password  String
+  role      String    @default("user")
+  status    String    @default("active")
+  lastLogin DateTime  @default(now())
+  error     Int       @default(0)
+  profile   String?
+  randToken String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+}
+
+model Otp {
+  id            Int      @id @default(autoincrement())
+  phone         String   @unique
+  otp           String
+  rememberToken String
+  verifyToken   String?
+  count         Int
+  error         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  image    String
+  products Product[]
+}
+
+model Color {
+  id       Int                @id @default(autoincrement())
+  name     String
+  bgColor  String
+  products ColorsOnProducts[]
+}
+
+model Size {
+  id       Int               @id @default(autoincrement())
+  name     String
+  products ProductsOnSizes[]
+}
+
+model Product {
+  id          Int                @id @default(autoincrement())
+  brand       String
+  title       String
+  star        Float
+  quantity    Int
+  price       Float
+  discount    Float?
+  image       String
+  description String
+  category    Category           @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  colors      ColorsOnProducts[]
+  sizes       ProductsOnSizes[]
+  users       User[]
+}
+
+model ColorsOnProducts {
+  id        Int     @id @default(autoincrement())
+  colorId   Int
+  productId Int
+  stock     Boolean @default(true)
+  color     Color   @relation(fields: [colorId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@unique([colorId, productId])
+}
+
+model ProductsOnSizes {
+  id        Int     @id @default(autoincrement())
+  sizeId    Int
+  productId Int
+  stock     Boolean @default(true)
+  size      Size    @relation(fields: [sizeId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@unique([sizeId, productId])
+}

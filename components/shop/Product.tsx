@@ -8,8 +8,8 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface ProductType {
-  id: string;
-  categories_id: string;
+  id: number;
+  categories_id: number;
   brand: string;
   title: string;
   star: number;
@@ -17,9 +17,7 @@ interface ProductType {
   price: number;
   discount: number;
   image: any;
-  favourite: boolean;
-  description: string;
-  onCallRoute: (id: string) => void;
+  onCallRoute: (id: number) => void;
 }
 
 const Product = ({
@@ -31,8 +29,6 @@ const Product = ({
   price,
   discount,
   image,
-  favourite,
-  description,
   onCallRoute,
 }: ProductType) => {
   return (

@@ -16,7 +16,7 @@ const initialState: initialStateType = {
 export const fetchRequiredInfo = createAsyncThunk(
   "requiredInfo/fetchAll",
   async (_, { rejectWithValue }) => {
-    const response = await fetchApi("requiredInfo");
+    const response = await fetchApi("/categories");
     if (!response) {
       return rejectWithValue("Network Connection failed. Please try again.");
     } else if (response.error) {
@@ -36,13 +36,8 @@ const requiredInfoSlice = createSlice({
     });
     builder.addCase(
       fetchRequiredInfo.fulfilled,
-      (
-        state,
-        action: PayloadAction<{
-          categories: CategoryType[];
-        }>
-      ) => {
-        state.categories = action.payload.categories;
+      (state, action: PayloadAction<CategoryType[]>) => {
+        state.categories = action.payload;
         state.isFetching = false;
       }
     );

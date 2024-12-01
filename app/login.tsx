@@ -30,8 +30,8 @@ export default function Login() {
   });
 
   const onSubmit = async (formState: any) => {
-    console.log(formState);
-    signIn();
+    // console.log(formState);
+    await signIn(formState);
     // Navigate after signing in. You may want to tweak this to ensure sign-in is
     // successful before navigating.
     router.replace("/");

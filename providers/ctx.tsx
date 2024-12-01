@@ -1,8 +1,10 @@
 import { useContext, createContext, type PropsWithChildren } from "react";
 import { useStorageState } from "@/hooks/useStorageState";
+import * as SecureStore from "expo-secure-store";
+import { fetchApi } from "@/api";
 
 const AuthContext = createContext<{
-  signIn: () => void;
+  signIn: ({}) => void;
   signOut: () => void;
   session?: string | null;
   isLoading: boolean;
@@ -31,11 +33,25 @@ export function SessionProvider({ children }: PropsWithChildren) {
   return (
     <AuthContext.Provider
       value={{
-        signIn: () => {
+        signIn: async (formState: any) => {
           // Perform sign-in logic here
-          setSession("xxx");
+          console.log("Login Data ---------", formState);
+          const response = await fetchApi("/login", "POST", formState); // Call Auth api
+          if (response) {
+            console.log("Login Response ----- ", response);
+
+            // store token and user info into secure storage or mmkv
+            setSession("xxx"); // set session string as you like
+            await SecureStore.setItemAsync("token", response.token);
+            await SecureStore.setItemAsync(
+              "refreshToken",
+              response.randomToken
+            );
+          }
         },
-        signOut: () => {
+        signOut: async () => {
+          await SecureStore.deleteItemAsync("token");
+          await SecureStore.deleteItemAsync("refreshToken");
           setSession(null);
         },
         session,

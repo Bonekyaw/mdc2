@@ -15,13 +15,15 @@ import Product from "@/components/shop/Product";
 import { useAppSelector, useAppDispatch } from "@/hooks/useRedux";
 import { fetchRequiredInfo } from "@/services/redux/requiredInfoSlice";
 import Toast from "react-native-root-toast";
+import type { ProductType } from "@/type";
+// import { useGetProductsQuery } from "@/services/redux/productSlice";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  const [select, setSelect] = useState("uuid1");
+  const [select, setSelect] = useState(1);
   const scrollRef = useRef<ScrollView>(null);
   useScrollToTop(scrollRef);
   const router = useRouter();
@@ -32,6 +34,25 @@ export default function HomeScreen() {
 
   const dispatch = useAppDispatch();
   const categories = useAppSelector((state) => state.requiredInfo.categories);
+
+  // const {
+  //   data: products,
+  //   isLoading,
+  //   isSuccess,
+  //   isError,
+  //   error,
+  //   refetch,
+  // } = useGetProductsQuery({ limit: 6, category: 1 });
+
+  // let ids: number[] = [];
+  // let entities: Record<number, ProductType>;
+  // if (!isLoading) {
+  //   console.log("Entities------", products.entities);
+  //   ids = products.ids;
+  //   entities = products.entities;
+  // }
+
+  // ids : [1, 2,...], entities: {1: {id: 1, "name": "something"}, ...}
 
   const fetchInfo = async () => {
     try {
@@ -52,7 +73,7 @@ export default function HomeScreen() {
     );
   }
 
-  const onSelectHandler = (id: string) => {
+  const onSelectHandler = (id: number) => {
     setSelect(id);
   };
 
@@ -67,7 +88,7 @@ export default function HomeScreen() {
     });
   };
 
-  const goDetail = (id: string) => {
+  const goDetail = (id: number) => {
     router.navigate({ pathname: "/detail", params: { id } });
   };
 
