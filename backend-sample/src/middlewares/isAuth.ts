@@ -12,6 +12,7 @@ const isAuth = (req: CustomRequest, res: Response, next: NextFunction) => {
   if (!authHeader) {
     const err: any = new Error("You are not an authenticated user!.");
     err.status = 401;
+    err.code = "Error_Unauthenticated";
     return next(err);
   }
 
@@ -22,15 +23,25 @@ const isAuth = (req: CustomRequest, res: Response, next: NextFunction) => {
       id: number;
     };
   } catch (error: any) {
-    error.status = 500;
+    if (error.name === "TokenExpiredError") {
+      error.status = 401;
+      error.message = "Access Token has expired.";
+      error.code = "Error_AccessTokenExpired";
+    } else {
+      error.status = 400;
+      error.message = "Access Token is invalid.";
+      error.code = "Error_Attack";
+    }
+
     return next(error);
   }
 
-  if (!decodedToken) {
-    const err: any = new Error("You are not an authenticated user!.");
-    err.status = 401;
-    return next(err);
-  }
+  // if (!decodedToken) {
+  //   const err: any = new Error("You are not an authenticated user!.");
+  //   err.status = 401;
+  //   err.code = "Error_AccessTokenExpired";
+  //   return next(err);
+  // }
 
   req.userId = decodedToken.id;
   next();

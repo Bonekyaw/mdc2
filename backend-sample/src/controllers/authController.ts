@@ -74,6 +74,7 @@ export const register = asyncHandler(async (req, res, next) => {
           "OTP requests are allowed only 3 times per day. Please try again tomorrow,if you reach the limit."
         );
         err.status = 405;
+        err.code = "Error_OverLimit";
         return next(err);
       } else {
         const otpData = {
@@ -123,6 +124,7 @@ export const verifyOTP = [
       // There are errors. Render form again with sanitized values/error messages.
       const err: any = new Error("Validation failed!");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
     const { token, phone, otp } = req.body;
@@ -148,6 +150,7 @@ export const verifyOTP = [
 
       const err: any = new Error("Token is invalid.");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -158,6 +161,7 @@ export const verifyOTP = [
       // expire at 1 min 30 sec
       const err: any = new Error("OTP is expired.");
       err.status = 403;
+      err.code = "Error_Expired";
       return next(err);
     }
 
@@ -179,6 +183,7 @@ export const verifyOTP = [
       // ----- Ending -----------
       const err: any = new Error("OTP is incorrect.");
       err.status = 401;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -226,6 +231,7 @@ export const confirmPassword = [
       // There are errors. Render form again with sanitized values/error messages.
       const err: any = new Error("Validation failed!");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
     const { token, phone, password } = req.body;
@@ -241,6 +247,7 @@ export const confirmPassword = [
         "This request may be an attack. If not, try again tomorrow."
       );
       err.status = 401;
+      err.code = "Error_Attack";
       return next(err);
     }
 
@@ -254,6 +261,7 @@ export const confirmPassword = [
 
       const err: any = new Error("Token is invalid.");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -264,6 +272,7 @@ export const confirmPassword = [
       // will expire after 5 min
       const err: any = new Error("Your request is expired. Please try again.");
       err.status = 403;
+      err.code = "Error_Expired";
       return next(err);
     }
 
@@ -314,6 +323,7 @@ export const login = [
       // There are errors. Render form again with sanitized values/error messages.
       const err: any = new Error("Validation failed!");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -329,6 +339,7 @@ export const login = [
         "Your account is temporarily locked. Please contact us."
       );
       err.status = 401;
+      err.code = "Error_Freeze";
       return next(err);
     }
 
@@ -363,6 +374,7 @@ export const login = [
       // ----- Ending -----------
       const err: any = new Error("Password is wrong.");
       err.status = 401;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -409,6 +421,7 @@ export const refreshToken = [
       // There are errors. Render form again with sanitized values/error messages.
       const err: any = new Error("Validation failed!");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -416,6 +429,7 @@ export const refreshToken = [
     if (!authHeader) {
       const err: any = new Error("You are not an authenticated user!.");
       err.status = 401;
+      err.code = "Error_Unauthenticated";
       throw err;
     }
     const { user_id, randomToken } = req.body;
@@ -434,6 +448,7 @@ export const refreshToken = [
         "This request may be an attack. Please contact the user team."
       );
       err.status = 400;
+      err.code = "Error_Attack";
       return next(err);
     }
 

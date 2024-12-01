@@ -33,6 +33,7 @@ export const index = [
       // There are errors. Render form again with sanitized values/error messages.
       const err: any = new Error("Validation failed!");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -99,6 +100,7 @@ export const show = [
       // There are errors. Render form again with sanitized values/error messages.
       const err: any = new Error("Validation failed!");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
 
@@ -122,6 +124,7 @@ export const toggleFavourite = [
       // There are errors. Render form again with sanitized values/error messages.
       const err: any = new Error("Validation failed!");
       err.status = 400;
+      err.code = "Error_Invalid";
       return next(err);
     }
 

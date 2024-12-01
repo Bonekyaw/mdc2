@@ -44,5 +44,6 @@ app.listen(PORT, () => {
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;
   const message = err.message;
-  res.status(status).json({ error: message });
+  const error_code = err.code || "Error_Code";
+  res.status(status).json({ error: error_code, message: message });
 });

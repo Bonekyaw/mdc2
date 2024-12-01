@@ -1,5 +1,5 @@
-import { Request } from 'express';
-import multer, { FileFilterCallback } from 'multer';
+import { Request } from "express";
+import multer, { FileFilterCallback } from "multer";
 
 const fileStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -33,7 +33,7 @@ const fileFilter = (req: Request, file: any, cb: FileFilterCallback) => {
 const upload = multer({
   storage: fileStorage,
   fileFilter: fileFilter,
-  limits: { fileSize: 1000000 * 2 },    // maximum 2 MB 
+  limits: { fileSize: 1000000 * 2 }, // maximum 2 MB
 });
 
 export default upload;

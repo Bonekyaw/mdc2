@@ -24,6 +24,7 @@ const authorise = (permission: boolean, ...roles: string[]) => {
     if (!user) {
       const err: any = new Error("This account has not registered!.");
       err.status = 401;
+      err.code = "Error_Unauthenticated";
       return next(err);
     }
 
@@ -32,12 +33,14 @@ const authorise = (permission: boolean, ...roles: string[]) => {
     if (!permission && result) {
       const err: any = new Error("This action is not allowed.");
       err.status = 403;
+      err.code = "Error_Unauthorised";
       return next(err);
     }
 
     if (permission && !result) {
       const err: any = new Error("This action is not allowed.");
       err.status = 403;
+      err.code = "Error_Unauthorised";
       return next(err);
     }
     req.user = user;

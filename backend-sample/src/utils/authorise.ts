@@ -14,12 +14,14 @@ const authorise = (permission: boolean, user: any, ...roles: string[]) => {
   if (!permission && result) {
     const err: any = new Error("This action is not allowed.");
     err.status = 403;
+    err.code = "Error_Unauthorised";
     throw err;
   }
 
   if (permission && !result) {
     const err: any = new Error("This action is not allowed.");
     err.status = 403;
+    err.code = "Error_Unauthorised";
     throw err;
   }
 };
