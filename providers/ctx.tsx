@@ -1,8 +1,7 @@
 import { useContext, createContext, type PropsWithChildren } from "react";
 import { useStorageState } from "@/hooks/useStorageState";
 import * as SecureStore from "expo-secure-store";
-import { fetchApi } from "@/api";
-
+import { fetchAuthApi } from "@/api/auth";
 const AuthContext = createContext<{
   signIn: ({}) => void;
   signOut: () => void;
@@ -27,6 +26,13 @@ export function useSession() {
   return value;
 }
 
+interface ResponseData {
+  message: string;
+  token: string;
+  randomToken: string;
+  user_id: number;
+}
+
 export function SessionProvider({ children }: PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState("session");
 
@@ -36,22 +42,28 @@ export function SessionProvider({ children }: PropsWithChildren) {
         signIn: async (formState: any) => {
           // Perform sign-in logic here
           console.log("Login Data ---------", formState);
-          const response = await fetchApi("/login", "POST", formState); // Call Auth api
-          if (response) {
-            console.log("Login Response ----- ", response);
+          try {
+            const response: any = await fetchAuthApi("/login", formState); // Call Auth api
+            if (response) {
+              console.log("Login Response ----- ", response);
 
-            // store token and user info into secure storage or mmkv
-            setSession("xxx"); // set session string as you like
-            await SecureStore.setItemAsync("token", response.token);
-            await SecureStore.setItemAsync(
-              "refreshToken",
-              response.randomToken
-            );
+              // store token and user info into secure storage or mmkv
+              setSession("xxx"); // set session string as you like
+              await SecureStore.setItemAsync("token", response.token);
+              await SecureStore.setItemAsync(
+                "refreshToken",
+                response.refreshToken
+              );
+              await SecureStore.setItemAsync("randToken", response.randToken);
+            }
+          } catch (err) {
+            console.error("Failed to fetch APi: ", err);
           }
         },
         signOut: async () => {
           await SecureStore.deleteItemAsync("token");
           await SecureStore.deleteItemAsync("refreshToken");
+          await SecureStore.deleteItemAsync("randToken");
           setSession(null);
         },
         session,

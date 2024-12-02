@@ -7,10 +7,12 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { fetchRequiredInfo } from "@/services/redux/requiredInfoSlice";
 import Toast from "react-native-root-toast";
+import { useSession } from "@/providers/ctx";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const dispatch = useAppDispatch();
+  const { signOut } = useSession();
 
   useEffect(() => {
     fetchInfo();
@@ -20,7 +22,13 @@ export default function TabLayout() {
     try {
       await dispatch(fetchRequiredInfo()).unwrap();
     } catch (error: any) {
-      Toast.show(error, { duration: Toast.durations.LONG });
+      if (error === "Error_AccessTokenExpired") {
+        // Error_Attack - Must Log Out
+        Toast.show("Session Token has expired. Please Login again.", {
+          duration: Toast.durations.LONG,
+        });
+        signOut();
+      } else Toast.show(error, { duration: Toast.durations.LONG });
     }
   };
 

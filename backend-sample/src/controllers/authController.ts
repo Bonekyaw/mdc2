@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 import asyncHandler from "express-async-handler";
-
+import { randomBytes } from "crypto";
 import { body, validationResult } from "express-validator";
 // import { v4: uuidv4 } from "uuid";
 // import moment from 'moment';
@@ -34,6 +34,10 @@ import { getUserById } from "../services/userService";
  * But in this app, we will simulate fake OTP - 123456
  */
 
+function generateRandomToken(length = 32) {
+  return randomBytes(length).toString("hex"); // Generates a hexadecimal token
+}
+
 export const register = asyncHandler(async (req, res, next) => {
   const phone = req.body.phone;
   const user = await getUserByPhone(phone);
@@ -41,7 +45,7 @@ export const register = asyncHandler(async (req, res, next) => {
 
   // OTP processing eg. Sending OTP request to Operator
   const otpCheck = await getOtpByPhone(phone);
-  const token = rand() + rand();
+  const token = generateRandomToken();
   let result;
   let otp = "123456";
 
@@ -187,7 +191,7 @@ export const verifyOTP = [
       return next(err);
     }
 
-    const randomToken = rand() + rand() + rand();
+    const randomToken = generateRandomToken();
     const otpData = {
       verifyToken: randomToken,
       count: 1,
@@ -247,7 +251,7 @@ export const confirmPassword = [
         "This request may be an attack. If not, try again tomorrow."
       );
       err.status = 401;
-      err.code = "Error_Attack";
+      err.code = "Error_Unauthorised";
       return next(err);
     }
 
@@ -278,7 +282,7 @@ export const confirmPassword = [
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-    const randToken = rand() + rand() + rand();
+    const randToken = generateRandomToken();
 
     const userData = {
       phone: req.body.phone,
@@ -289,6 +293,10 @@ export const confirmPassword = [
 
     // jwt token
     let payload = { id: newUser.id };
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET!, {
+      expiresIn: "7d",
+    });
+
     const jwtToken = jwt.sign(payload, process.env.TOKEN_SECRET!, {
       expiresIn: "1h",
     });
@@ -297,7 +305,8 @@ export const confirmPassword = [
       message: "Successfully created an account.",
       token: jwtToken,
       user_id: newUser.id,
-      randomToken: randToken,
+      randToken: randToken,
+      refreshToken: refreshToken,
     });
   }),
 ];
@@ -378,7 +387,8 @@ export const login = [
       return next(err);
     }
 
-    const randToken = rand() + rand() + rand();
+    const randToken = generateRandomToken();
+
     if (user!.error >= 1) {
       const userData = {
         error: 0,
@@ -393,26 +403,31 @@ export const login = [
     }
 
     let payload = { id: user!.id };
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET!, {
+      expiresIn: "7d",
+    });
+
     const jwtToken = jwt.sign(payload, process.env.TOKEN_SECRET!, {
       expiresIn: "1h",
     });
 
-    res.status(201).json({
+    res.status(200).json({
       message: "Successfully Logged In.",
       token: jwtToken,
       user_id: user!.id,
-      randomToken: randToken,
+      randToken: randToken,
+      refreshToken: refreshToken,
     });
   }),
 ];
 
 export const refreshToken = [
   // Validate and sanitize fields.
-  body("randomToken", "randomToken must not be empty.")
+  body("refreshToken", "RefreshToken must not be empty.")
     .trim()
     .notEmpty()
     .escape(),
-  body("user_id", "User ID must not be empty.").isInt().toInt(),
+  body("randToken", "RandToken must not be empty.").trim().notEmpty().escape(),
 
   asyncHandler(async (req, res, next) => {
     // Extract the validation errors from a request.
@@ -432,17 +447,33 @@ export const refreshToken = [
       err.code = "Error_Unauthenticated";
       throw err;
     }
-    const { user_id, randomToken } = req.body;
-    // let user_id = parseInt(req.body.user_id);  // Hey take care, we want only Integer.
+    const { refreshToken, randToken } = req.body;
 
-    const user = await getUserById(user_id);
+    // Refresh Token Verification
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET!
+      ) as {
+        id: number;
+      };
+    } catch (error: any) {
+      error.status = 401;
+      error.message = "App needs to be logged out.";
+      error.code = "Error_Attack"; // LogOut
+      return next(error);
+    }
+    const userId = decodedToken.id;
+
+    const user = await getUserById(userId);
     checkUser(user);
 
-    if (user!.randToken !== randomToken) {
+    if (user!.randToken !== randToken) {
       const userData = {
         error: 5,
       };
-      await updateUser(user_id, userData);
+      await updateUser(userId, userData);
 
       const err: any = new Error(
         "This request may be an attack. Please contact the user team."
@@ -452,26 +483,33 @@ export const refreshToken = [
       return next(err);
     }
 
-    const randToken = rand() + rand() + rand();
+    const randTokenNew = generateRandomToken();
 
     const userData = {
-      randToken: randToken,
+      randToken: randTokenNew,
     };
-    await updateUser(user_id, userData);
+    await updateUser(userId, userData);
 
     // jwt token
-    let payload = { id: user_id };
+    let payload = { id: userId };
+    const refreshTokenNew = jwt.sign(
+      payload,
+      process.env.REFRESH_TOKEN_SECRET!,
+      {
+        expiresIn: "7d",
+      }
+    );
+
     const jwtToken = jwt.sign(payload, process.env.TOKEN_SECRET!, {
       expiresIn: "1h",
     });
 
-    res.status(201).json({
+    res.status(200).json({
       message: "Successfully sent a new token.",
       token: jwtToken,
-      user_id: user_id,
-      randomToken: randToken,
+      user_id: userId,
+      randToken: randTokenNew,
+      refreshToken: refreshTokenNew,
     });
   }),
 ];
-
-const rand = () => Math.random().toString(36).substring(2);

@@ -19,7 +19,12 @@ export const fetchRequiredInfo = createAsyncThunk(
     const response = await fetchApi("/categories");
     if (!response) {
       return rejectWithValue("Network Connection failed. Please try again.");
-    } else if (response.error) {
+    }
+    if (response.error === "Error_AccessTokenExpired") {
+      // Error_Attack - Must Log Out
+      return rejectWithValue(response.error);
+    }
+    if (response.error) {
       return rejectWithValue(response.message);
     }
     return response;

@@ -5,16 +5,26 @@ import Toast from "react-native-root-toast";
 async function fetchWithRetry(url: string, options: {}, retries = 5) {
   try {
     const response = await fetch(url, options);
-    if (response.status == 401) {
-      Toast.show("Login failed.", {
-        duration: Toast.durations.LONG,
-      });
+    // if (response.status >= 500 || !response.ok) {
+    //   console.log("Error Response--------", response);
+    //   throw new Error("Request failed with status " + response.status);
+    // }
+    if (!response.ok) {
+      const res = await response.json();
+      if (response.status == 401 && res.error === "Error_AccessTokenExpired") {
+        Toast.show(res.message, {
+          duration: Toast.durations.LONG,
+        });
+        return { error: res.error };
+      }
+
+      // Error_Attack - Must Log Out
+
+      console.log("Error Response in redux--------", res);
+      Toast.show(res.message, { duration: Toast.durations.LONG });
       return null;
     }
-    if (!response.ok) {
-      console.log("Error Response--------", response);
-      throw new Error("Request failed with status " + response.status);
-    }
+
     return response.json();
   } catch (error) {
     if (retries > 0) {
@@ -22,7 +32,10 @@ async function fetchWithRetry(url: string, options: {}, retries = 5) {
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return fetchWithRetry(url, options, retries - 1);
-    } else throw error;
+    } else
+      Toast.show("Network request failed! Try again later.", {
+        duration: Toast.durations.LONG,
+      });
   }
 }
 

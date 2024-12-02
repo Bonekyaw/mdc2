@@ -17,6 +17,7 @@ import { fetchRequiredInfo } from "@/services/redux/requiredInfoSlice";
 import Toast from "react-native-root-toast";
 import type { ProductType } from "@/type";
 // import { useGetProductsQuery } from "@/services/redux/productSlice";
+import { useSession } from "@/providers/ctx";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -27,6 +28,7 @@ export default function HomeScreen() {
   const scrollRef = useRef<ScrollView>(null);
   useScrollToTop(scrollRef);
   const router = useRouter();
+  const { signOut } = useSession();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -58,7 +60,13 @@ export default function HomeScreen() {
     try {
       await dispatch(fetchRequiredInfo()).unwrap();
     } catch (error: any) {
-      Toast.show(error, { duration: Toast.durations.LONG });
+      if (error === "Error_AccessTokenExpired") {
+        // Error_Attack - Must Log Out
+        Toast.show("Session Token has expired. Please Login again.", {
+          duration: Toast.durations.LONG,
+        });
+        signOut();
+      } else Toast.show(error, { duration: Toast.durations.LONG });
     }
   };
 
