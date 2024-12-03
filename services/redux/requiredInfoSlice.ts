@@ -20,7 +20,7 @@ export const fetchRequiredInfo = createAsyncThunk(
     if (!response) {
       return rejectWithValue("Network Connection failed. Please try again.");
     }
-    if (response.error === "Error_AccessTokenExpired") {
+    if (response.error === "Error_Attack") {
       // Error_Attack - Must Log Out
       return rejectWithValue(response.error);
     }

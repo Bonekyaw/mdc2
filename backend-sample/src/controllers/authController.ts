@@ -408,7 +408,7 @@ export const login = [
     });
 
     const jwtToken = jwt.sign(payload, process.env.TOKEN_SECRET!, {
-      expiresIn: "1h",
+      expiresIn: 60 * 3, // "1h"
     });
 
     res.status(200).json({
@@ -501,7 +501,7 @@ export const refreshToken = [
     );
 
     const jwtToken = jwt.sign(payload, process.env.TOKEN_SECRET!, {
-      expiresIn: "1h",
+      expiresIn: 60 * 3, // "1h"
     });
 
     res.status(200).json({

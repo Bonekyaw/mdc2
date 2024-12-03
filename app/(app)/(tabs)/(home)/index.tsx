@@ -60,9 +60,9 @@ export default function HomeScreen() {
     try {
       await dispatch(fetchRequiredInfo()).unwrap();
     } catch (error: any) {
-      if (error === "Error_AccessTokenExpired") {
+      if (error === "Error_Attack") {
         // Error_Attack - Must Log Out
-        Toast.show("Session Token has expired. Please Login again.", {
+        Toast.show("Long time no see. Please Login again.", {
           duration: Toast.durations.LONG,
         });
         signOut();
