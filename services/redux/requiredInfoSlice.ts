@@ -16,7 +16,7 @@ const initialState: initialStateType = {
 export const fetchRequiredInfo = createAsyncThunk(
   "requiredInfo/fetchAll",
   async (_, { rejectWithValue }) => {
-    const response = await fetchApi("/categories");
+    const response = await fetchApi("categories");
     if (!response) {
       return rejectWithValue("Network Connection failed. Please try again.");
     }

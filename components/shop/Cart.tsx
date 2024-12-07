@@ -1,36 +1,34 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useAppSelector } from "@/hooks/useRedux";
+import { selectCount } from "@/services/redux/cartSlice";
 
-const Cart = () => {
+export default function Cart() {
+  const count = useAppSelector(selectCount);
   return (
-    <View style={styles.container}>
+    <View style={{ flexDirection: "row" }}>
       <Ionicons name="cart-outline" size={24} color="black" />
-      <View style={styles.textContainer}>
-        <Text style={styles.quantity}>5</Text>
+      <View style={styles.container}>
+        <Text style={styles.badge}>{count}</Text>
       </View>
     </View>
   );
-};
-
-export default Cart;
+}
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-  },
-  textContainer: {
+    backgroundColor: "red",
     width: 20,
     height: 20,
-    backgroundColor: "red",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     marginLeft: -10,
     marginTop: -5,
   },
-  quantity: {
-    color: "white",
-    fontWeight: "bold",
+  badge: {
     fontSize: 11,
+    fontWeight: "bold",
+    color: "#ffffff",
   },
 });

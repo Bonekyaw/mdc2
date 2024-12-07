@@ -8,6 +8,13 @@ async function fetchWithRetry(url: string, options: {}, retries = 5) {
 
     if (!response.ok) {
       const res = await response.json();
+      console.log(
+        "Error Response in redux-------- Url is ---",
+        url,
+        "--- status is ---",
+        res
+      );
+
       if (response.status == 401 && res.error === "Error_AccessTokenExpired") {
         // Toast.show(res.message, {
         //   duration: Toast.durations.LONG,
@@ -17,9 +24,8 @@ async function fetchWithRetry(url: string, options: {}, retries = 5) {
 
       // Error_Attack - Must Log Out
 
-      console.log("Error Response in redux--------", res);
       Toast.show(res.message, { duration: Toast.durations.LONG });
-      return null;
+      return { error: res.error };
     }
     console.log("Url is ---", url, "--- status is ---", response.status);
 
@@ -38,16 +44,16 @@ async function fetchWithRetry(url: string, options: {}, retries = 5) {
 }
 
 async function fetchRefreshToken() {
-  const token = await SecureStore.getItemAsync("token");
+  // const token = await SecureStore.getItemAsync("token");
   const refreshToken = await SecureStore.getItemAsync("refreshToken");
   const randToken = await SecureStore.getItemAsync("randToken");
 
-  const url = API_URL + "/refresh-token";
+  const url = API_URL + "refresh-token";
   const method = "POST";
   const headers = {
     accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
+    Authorization: "Bearer " + "anythingisfine",
   };
   const options = {
     method,
@@ -57,12 +63,16 @@ async function fetchRefreshToken() {
 
   try {
     const response = await fetchWithRetry(url, options, 5);
-    await SecureStore.setItemAsync("token", response.token);
-    await SecureStore.setItemAsync("refreshToken", response.refreshToken);
-    await SecureStore.setItemAsync("randToken", response.randToken);
+    if (response.error) {
+      return { refresh: false };
+    } else {
+      await SecureStore.setItemAsync("token", response.token);
+      await SecureStore.setItemAsync("refreshToken", response.refreshToken);
+      await SecureStore.setItemAsync("randToken", response.randToken);
+    }
     return { refresh: true, newToken: response.token };
   } catch (error) {
-    console.error("Failed to fetch Refresh Token: ", error);
+    console.error("Failed to fetch Refresh Token: ", error || "Type error");
   }
 }
 
@@ -82,10 +92,10 @@ export const fetchApi = async (endpoint = "", method = "GET", data = {}) => {
 
   try {
     const response = await fetchWithRetry(url, options, 5);
-    if (response.error === "Error_AccessTokenExpired") {
+    if (response.error && response.error === "Error_AccessTokenExpired") {
       // Call Refresh Token API
       // IF successful, call again fetchWithRetry()
-      console.log("Fetching refresh token --------");
+      // console.log("Fetching refresh token --------");
 
       const res = await fetchRefreshToken();
       if (res?.refresh) {
@@ -101,13 +111,15 @@ export const fetchApi = async (endpoint = "", method = "GET", data = {}) => {
             : { method, headers: newhHeaders, body: JSON.stringify(data) };
 
         const resAgain = await fetchWithRetry(url, newOptions, 5);
-        console.log("Finally success --------", resAgain);
+        // console.log("Finally success --------", resAgain);
 
         return resAgain;
+      } else {
+        return { error: "Error_Attack" };
       }
     }
     return response;
   } catch (error) {
-    console.error("Failed to fetch APi: ", error);
+    console.error("Failed to fetch APi: ", error || "Type error");
   }
 };

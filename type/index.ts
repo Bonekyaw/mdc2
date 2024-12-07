@@ -1,5 +1,5 @@
 export interface User {
-  id: string;
+  id: number;
 }
 
 export interface ProductType {
@@ -14,7 +14,7 @@ export interface ProductType {
   image: string;
   colors: ColorType[];
   sizes: SizeType[];
-  user: User[];
+  users: User[];
   description: string;
 }
 
@@ -26,15 +26,25 @@ export interface CategoryType {
 
 export interface ColorType {
   id: number;
-  name: string;
-  bgColor: string;
+  colorId: number;
+  productId: number;
   stock: boolean;
+  color: {
+    id: number;
+    name: string;
+    bgColor: string;
+  };
 }
 
 export interface SizeType {
   id: number;
-  name: string;
+  sizeId: number;
+  productId: number;
   stock: boolean;
+  size: {
+    id: number;
+    name: string;
+  };
 }
 
 export interface SampleType {

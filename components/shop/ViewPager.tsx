@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo, useMemo } from "react";
 import { StyleSheet, Text, View, Animated, Dimensions } from "react-native";
 import PagerView, {
   PagerViewOnPageScrollEventData,
@@ -18,20 +18,24 @@ import { Image } from "expo-image";
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
-export default function ViewPager() {
+const ViewPager = () => {
   const { width, height } = Dimensions.get("window");
   const pageRef = React.useRef<PagerView>(null);
   const [current, setCurrent] = useState(0);
   const scrollOffsetAnimatedValue = React.useRef(new Animated.Value(0)).current;
   const positionAnimatedValue = React.useRef(new Animated.Value(0)).current;
   const inputRange = [0, sample.length];
-  const scrollX = Animated.add(
-    scrollOffsetAnimatedValue,
-    positionAnimatedValue
-  ).interpolate({
-    inputRange,
-    outputRange: [0, sample.length * width],
-  });
+  const scrollX = useMemo(
+    () =>
+      Animated.add(
+        scrollOffsetAnimatedValue,
+        positionAnimatedValue
+      ).interpolate({
+        inputRange,
+        outputRange: [0, sample.length * width],
+      }),
+    []
+  );
 
   const onPageScroll = React.useMemo(
     () =>
@@ -102,7 +106,7 @@ export default function ViewPager() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   imageView: {
@@ -122,3 +126,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+export default memo(ViewPager);

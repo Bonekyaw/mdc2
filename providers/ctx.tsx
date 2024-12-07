@@ -43,7 +43,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
           // Perform sign-in logic here
           console.log("Login Data ---------", formState);
           try {
-            const response: any = await fetchAuthApi("/login", formState); // Call Auth api
+            const response: any = await fetchAuthApi("login", formState); // Call Auth api
             if (response) {
               console.log("Login Response ----- ", response);
 
@@ -57,14 +57,18 @@ export function SessionProvider({ children }: PropsWithChildren) {
               await SecureStore.setItemAsync("randToken", response.randToken);
             }
           } catch (err) {
-            console.error("Failed to fetch APi: ", err);
+            console.error("Failed in ctx: ", err);
           }
         },
         signOut: async () => {
-          await SecureStore.deleteItemAsync("token");
-          await SecureStore.deleteItemAsync("refreshToken");
-          await SecureStore.deleteItemAsync("randToken");
-          setSession(null);
+          try {
+            await SecureStore.deleteItemAsync("token");
+            await SecureStore.deleteItemAsync("refreshToken");
+            await SecureStore.deleteItemAsync("randToken");
+            setSession(null);
+          } catch (error) {
+            console.error("Failed in ctx: ", error);
+          }
         },
         session,
         isLoading,

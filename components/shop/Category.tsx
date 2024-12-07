@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { IMG_URL } from "@/config";
@@ -52,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Category;
+export default memo(Category);

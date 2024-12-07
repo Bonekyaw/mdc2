@@ -135,9 +135,11 @@ export const toggleFavourite = [
     let result;
 
     if (favourite) {
-      result = await addProductToFavourite(+productId, +userId);
+      await addProductToFavourite(+productId, +userId);
+      result = { productId, userId };
     } else {
-      result = await removeProductFromFavourite(+productId, +userId);
+      await removeProductFromFavourite(+productId, +userId);
+      result = { productId, userId: null };
     }
 
     res.status(200).json(result);

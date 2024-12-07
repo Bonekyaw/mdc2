@@ -1,58 +1,101 @@
-import { useEffect, useState } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "expo-router";
+import { memo } from "react";
 
-import { API_URL } from "@/config";
-import { User } from "@/type";
+import {
+  useGetUsersQuery,
+  useUpdateUserMutation,
+} from "@/services/redux/userSlice";
+
+type UserType = {
+  id: string;
+  name: string;
+};
 
 export default function ExploreScreen() {
-  const navigation = useNavigation();
-  const [users, setUsers] = useState<User[]>([]);
+  // const {
+  //   data: users,
+  //   isLoading,
+  //   isSuccess,
+  //   isError,
+  //   error,
+  //   refetch,
+  // } = useGetUsersQuery("getUsers");
 
-  useEffect(() => {
-    navigation.setOptions({ headerShown: false });
-    getUsers();
-  }, [navigation]);
+  // let content;
+  // if (isLoading) {
+  //   content = <Text>"Loading..."</Text>;
+  // } else if (isSuccess) {
+  //   console.log("Users-----", users);
+  //   if (Object.keys(users.entities).length === 0) {
+  //     return (
+  //       <View
+  //         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+  //       >
+  //         <Text>Data request has failed!</Text>
+  //         <Pressable style={styles.btnError} onPress={refetch}>
+  //           <Text>Try again</Text>
+  //         </Pressable>
+  //       </View>
+  //     );
+  //   }
 
-  const getUsers = async () => {
-    try {
-      const response = await fetch(API_URL + "users");
-      if (!response.ok) {
-        throw new Error(`Resquest failed due to ${response.status}`);
-      }
-      const resJson = await response.json();
-      // console.log("Response : ", resJson);
-      setUsers(resJson);
-    } catch (error) {
-      console.warn("Internet connection lost!");
-    }
-  };
+  //   // console.log("In expore -----", users);
+  //   const { ids, entities } = users; // ids : ["uuid1", "uuid2",...], entities: {"uuid1": {id: "uuid1", "name": "David22"}, ...}
+  //   content = ids.map((userId: string) => (
+  //     <UserItem key={userId} user={entities[userId]} />
+  //   ));
+  // } else if (isError) {
+  //   content = <Text>An error occurs.</Text>;
+  // }
 
   return (
-    <SafeAreaView>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Hello</Text>
-        <Text style={styles.content}>Hello from explore screen</Text>
-        {users.map((user) => <Text key={user.id}>{user.name}</Text>)}
-      </View>
+    <SafeAreaView style={styles.titleContainer}>
+      <Text>Waiting...</Text>
     </SafeAreaView>
   );
 }
 
+// const UserItem = memo(({ user }: { user: UserType }) => {
+//   const [updateUser, { isLoading }] = useUpdateUserMutation();
+//   console.log("User --------", user.id);
+
+//   const updateUserClick = async () => {
+//     try {
+//       await updateUser({
+//         id: user.id,
+//         name: user.name + new Date().getSeconds(),
+//       }).unwrap();
+//     } catch (error) {
+//       console.error("Failed to save the user", error);
+//     }
+//   };
+
+//   return (
+//     <Pressable onPress={updateUserClick} style={{ marginVertical: 11 }}>
+//       <Text style={styles.name}>{user.name}</Text>
+//     </Pressable>
+//   );
+// });
+
 const styles = StyleSheet.create({
   titleContainer: {
-    width: "100%",
     height: "100%",
-    justifyContent: "center",
+    backgroundColor: "#deeeef",
     alignItems: "center",
+    justifyContent: "center",
   },
-  title: {
-    fontSize: 40,
-    fontWeight: "bold",
-    color: "green",
+  name: {
+    fontSize: 17,
+    fontWeight: "600",
+    letterSpacing: 3,
   },
-  content: {
-    fontSize: 20,
+  btnError: {
+    marginTop: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderColor: "black",
+    borderWidth: 0.5,
+    borderRadius: 5,
   },
 });
