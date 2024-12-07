@@ -1,4 +1,5 @@
-import React, { useEffect, useState, memo, useMemo } from "react";
+import React, { useEffect, useState, memo, useMemo, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { StyleSheet, Text, View, Animated, Dimensions } from "react-native";
 import PagerView, {
   PagerViewOnPageScrollEventData,
@@ -19,6 +20,8 @@ const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const ViewPager = () => {
+  console.log("ViewPager rendered - ");
+
   const { width, height } = Dimensions.get("window");
   const pageRef = React.useRef<PagerView>(null);
   const [current, setCurrent] = useState(0);
@@ -56,17 +59,31 @@ const ViewPager = () => {
     []
   );
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrent((prev) => {
-        const nextPage = (prev + 1) % sample.length;
-        pageRef.current?.setPage(nextPage);
-        return nextPage;
-      });
-    }, 2000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setCurrent((prev) => {
+  //       const nextPage = (prev + 1) % sample.length;
+  //       pageRef.current?.setPage(nextPage);
+  //       return nextPage;
+  //     });
+  //   }, 2000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      const intervalId = setInterval(() => {
+        setCurrent((prev) => {
+          const nextPage = (prev + 1) % sample.length;
+          pageRef.current?.setPage(nextPage);
+          return nextPage;
+        });
+      }, 2000);
+
+      return () => clearInterval(intervalId); // Cleanup when the screen loses focus
+    }, [])
+  );
 
   return (
     <View style={{ width: width, height: height / 3 }}>

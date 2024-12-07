@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useCallback } from "react";
+import { useState, useRef, useMemo, useCallback, memo } from "react";
 import {
   StyleSheet,
   Text,
@@ -32,6 +32,70 @@ import ViewPager from "@/components/shop/ViewPager";
 import { useSession } from "@/providers/ctx";
 
 const { width, height } = Dimensions.get("window");
+
+const ColorBox = memo(
+  ({
+    id,
+    name,
+    bgColor,
+    stock,
+    handleOpenPress,
+  }: {
+    id: number;
+    name: string;
+    bgColor: string;
+    stock: boolean;
+    handleOpenPress: () => void;
+  }) => (
+    <Pressable
+      onPress={handleOpenPress}
+      style={[
+        styles.circle,
+        { backgroundColor: bgColor, borderWidth: 0.2, borderColor: "gray" },
+      ]}
+    >
+      <Ionicons
+        name="checkmark"
+        size={19}
+        color={stock ? (bgColor === "#ffffff" ? "black" : "white") : bgColor}
+      />
+    </Pressable>
+  )
+);
+
+const SizeBox = memo(
+  ({
+    id,
+    name,
+    stock,
+    handleOpenPress,
+  }: {
+    id: number;
+    name: string;
+    stock: boolean;
+    handleOpenPress: () => void;
+  }) => (
+    <Pressable
+      onPress={handleOpenPress}
+      style={[
+        styles.circle,
+        stock
+          ? { backgroundColor: "gray" }
+          : { borderWidth: 1, borderColor: "gray" },
+      ]}
+    >
+      <Text
+        style={[
+          { fontSize: 10, fontWeight: "600" },
+          stock && { color: "white" },
+        ]}
+      >
+        {name}
+      </Text>
+    </Pressable>
+  )
+);
+
 const Detail = () => {
   const { id } = useLocalSearchParams();
   // const productLocal = products.find((product) => product.id === +id);
@@ -64,21 +128,21 @@ const Detail = () => {
   }
   const [cart, setCart] = useState(cartArray);
 
-  const increase = () => {
+  const increase = useCallback(() => {
     if (!color || !size) {
       return Toast.show("Please choose color & size.", {
         duration: Toast.durations.LONG,
       });
     }
     setQuantity((q) => q + 1);
-  };
+  }, [color, size]);
 
-  const decrease = () => {
+  const decrease = useCallback(() => {
     if (quantity == 1) return;
     setQuantity((q) => q - 1);
-  };
+  }, [quantity]);
 
-  const addToCart = () => {
+  const addToCart = useCallback(() => {
     if (!color || !size) {
       return Toast.show("Please choose color & size.", {
         duration: Toast.durations.LONG,
@@ -102,9 +166,9 @@ const Detail = () => {
     //   ],
     // };
     // dispatch(addCart(cartItem));
-  };
+  }, [color, size, quantity]);
 
-  const removeCart = (id: number) => {
+  const removeCart = useCallback((id: number) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
     // Update To Dedux
     // const cartItem = {
@@ -115,7 +179,7 @@ const Detail = () => {
     //   items: cart.filter((item) => item.id !== id),
     // };
     // dispatch(addCart(cartItem));
-  };
+  }, []);
 
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -145,12 +209,12 @@ const Detail = () => {
     []
   );
 
-  const updateFavourite = async (id: number, fav: boolean) => {
+  const updateFavourite = useCallback(async (id: number, fav: boolean) => {
     const updatedData = fav ? { users: [{ id: 1 }] } : { users: [] };
     dispatch(entityUpdate({ id, changes: updatedData }));
-  };
+  }, []);
 
-  const addToFavourite = async (id: number, fav: boolean) => {
+  const addToFavourite = useCallback(async (id: number, fav: boolean) => {
     try {
       const data = { productId: id, favourite: fav };
       await updateProduct(data).unwrap();
@@ -160,29 +224,31 @@ const Detail = () => {
         duration: Toast.durations.LONG,
       });
     }
-  };
+  }, []);
 
   // render
-  // Please Note - You should not use useCallback
-  const renderSheetItem = ({ item }: any) => (
-    <View style={[styles.itemContainer, { width: width - 40 }]}>
-      <Text style={{ fontWeight: "bold", opacity: 0.5, textAlign: "left" }}>
-        {item.color.toUpperCase()} - {item.size} - ( $
-        {(product!.price * item.quantity).toFixed(2)} )
-      </Text>
-      <Text>( {item.quantity} )</Text>
-      <Pressable onPress={() => removeCart(item.id)}>
-        <Ionicons
-          name="close-circle"
-          size={24}
-          color="black"
-          style={{ marginLeft: 50 }}
-        />
-      </Pressable>
-    </View>
+  const renderSheetItem = useCallback(
+    ({ item }: any) => (
+      <View style={[styles.itemContainer, { width: width - 40 }]}>
+        <Text style={{ fontWeight: "bold", opacity: 0.5, textAlign: "left" }}>
+          {item.color.toUpperCase()} - {item.size} - ( $
+          {(product!.price * item.quantity).toFixed(2)} )
+        </Text>
+        <Text>( {item.quantity} )</Text>
+        <Pressable onPress={() => removeCart(item.id)}>
+          <Ionicons
+            name="close-circle"
+            size={24}
+            color="black"
+            style={{ marginLeft: 50 }}
+          />
+        </Pressable>
+      </View>
+    ),
+    [product]
   );
 
-  const addCartToRedux = () => {
+  const addCartToRedux = useCallback(() => {
     if (cart.length == 0) {
       return Toast.show("Please choose color & size.", {
         duration: Toast.durations.LONG,
@@ -198,9 +264,9 @@ const Detail = () => {
     };
     dispatch(addCart(cartItem));
     router.back();
-  };
+  }, [cart, product]);
 
-  const buyNow = () => {
+  const buyNow = useCallback(() => {
     if (cart.length == 0) {
       return Toast.show("Please choose color & size.", {
         duration: Toast.durations.LONG,
@@ -216,62 +282,7 @@ const Detail = () => {
     };
     dispatch(addCart(cartItem));
     router.push("/cart");
-  };
-
-  const ColorBox = ({
-    id,
-    name,
-    bgColor,
-    stock,
-  }: {
-    id: number;
-    name: string;
-    bgColor: string;
-    stock: boolean;
-  }) => (
-    <Pressable
-      onPress={handleOpenPress}
-      style={[
-        styles.circle,
-        { backgroundColor: bgColor, borderWidth: 0.2, borderColor: "gray" },
-      ]}
-    >
-      <Ionicons
-        name="checkmark"
-        size={19}
-        color={stock ? (bgColor === "#ffffff" ? "black" : "white") : bgColor}
-      />
-    </Pressable>
-  );
-
-  const SizeBox = ({
-    id,
-    name,
-    stock,
-  }: {
-    id: number;
-    name: string;
-    stock: boolean;
-  }) => (
-    <Pressable
-      onPress={handleOpenPress}
-      style={[
-        styles.circle,
-        stock
-          ? { backgroundColor: "gray" }
-          : { borderWidth: 1, borderColor: "gray" },
-      ]}
-    >
-      <Text
-        style={[
-          { fontSize: 10, fontWeight: "600" },
-          stock && { color: "white" },
-        ]}
-      >
-        {name}
-      </Text>
-    </Pressable>
-  );
+  }, [cart, product]);
 
   if (isLoading) {
     return (
@@ -386,6 +397,7 @@ const Detail = () => {
                         name={item.color.name}
                         bgColor={item.color.bgColor}
                         stock={item.stock}
+                        handleOpenPress={handleOpenPress}
                       />
                     ))}
                   </View>
@@ -399,6 +411,7 @@ const Detail = () => {
                         id={item.id}
                         name={item.size.name}
                         stock={item.stock}
+                        handleOpenPress={handleOpenPress}
                       />
                     ))}
                   </View>
@@ -509,6 +522,7 @@ const Detail = () => {
                       name={item.color.name}
                       bgColor={item.color.bgColor}
                       stock={item.stock}
+                      handleOpenPress={() => {}}
                     />
                   ) : null
                 )}
@@ -520,6 +534,7 @@ const Detail = () => {
                       id={item.id}
                       name={item.size.name}
                       stock={item.stock}
+                      handleOpenPress={() => {}}
                     />
                   ) : null
                 )}

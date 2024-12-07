@@ -44,6 +44,8 @@ const Product = ({
   onCallRoute,
   toggleFavourite,
 }: ProductType) => {
+  console.log("Product rendered - ", id);
+
   return (
     <View style={styles.container}>
       <Pressable

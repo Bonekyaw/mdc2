@@ -75,27 +75,7 @@ export default function HomeScreen() {
     }
   }, []);
 
-  if (categories.length === 0) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Data Request has failed!</Text>
-        <Pressable style={styles.btnError} onPress={fetchInfo}>
-          <Text>Try again</Text>
-        </Pressable>
-      </View>
-    );
-  }
-
-  const onSelectHandler = (id: number) => {
-    setSelect(id);
-    fetchAllProducts(id);
-  };
-
-  // if (productsLoading) {
-  //   return <Text>Loading...</Text>;
-  // }
-
-  const addToFavourite = async (id: number, fav: boolean) => {
+  const addToFavourite = useCallback(async (id: number, fav: boolean) => {
     try {
       const data = { productId: id, favourite: fav };
       await dispatch(updateFavouriteApi(data)).unwrap();
@@ -108,18 +88,38 @@ export default function HomeScreen() {
         signOut();
       } else Toast.show(error, { duration: Toast.durations.LONG });
     }
-  };
+  }, []);
 
-  const onPressScroll = () => {
+  const goDetail = useCallback((id: number) => {
+    router.navigate({ pathname: "/detail", params: { id } });
+  }, []);
+
+  const onSelectHandler = useCallback((id: number) => {
+    setSelect(id);
+    fetchAllProducts(id);
+  }, []);
+
+  const onPressScroll = useCallback(() => {
     scrollRef.current?.scrollTo({
       y: 0,
       animated: true,
     });
-  };
+  }, []);
 
-  const goDetail = (id: number) => {
-    router.navigate({ pathname: "/detail", params: { id } });
-  };
+  if (categories.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Data Request has failed!</Text>
+        <Pressable style={styles.btnError} onPress={fetchInfo}>
+          <Text>Try again</Text>
+        </Pressable>
+      </View>
+    );
+  }
+
+  // if (productsLoading) {
+  //   return <Text>Loading...</Text>;
+  // }
 
   const FakeSkeleton = () => (
     <View style={{ flexDirection: "row", gap: 15 }}>

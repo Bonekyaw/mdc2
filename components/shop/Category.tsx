@@ -14,6 +14,8 @@ interface Props {
 }
 
 const Category = ({ id, name, image, onSelect, select }: Props) => {
+  console.log("Category rendered - ", id);
+
   return (
     <Pressable style={styles.container} onPress={() => onSelect(id)}>
       <Image

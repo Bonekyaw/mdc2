@@ -1,9 +1,12 @@
+import { memo } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectCount } from "@/services/redux/cartSlice";
 
-export default function Cart() {
+const Cart = () => {
+  console.log("Cart rendered - ");
+
   const count = useAppSelector(selectCount);
   return (
     <View style={{ flexDirection: "row" }}>
@@ -13,7 +16,7 @@ export default function Cart() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -32,3 +35,5 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
 });
+
+export default memo(Cart);

@@ -8,7 +8,7 @@ import {
 
 const router = express.Router();
 
-// GET localhost:8080/api/v1/products
+// GET localhost:8080/api/v1/products?limit=10&category=1&cursor=5
 // Get all products
 router.get("/products", index);
 // router.get('/products', authorise(true, "admin"), index);
