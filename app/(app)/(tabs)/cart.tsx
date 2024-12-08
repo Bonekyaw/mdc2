@@ -72,8 +72,7 @@ const CartItem = memo(
                     {title.length > 35 ? title.substring(0, 34) + "..." : title}
                   </Text>
                   <Text style={styles.select}>
-                    Color - [ {item.selectedColor} ] & Size - [{" "}
-                    {item.selectedSize} ]
+                    Color - [ {item.color} ] & Size - [ {item.size} ]
                   </Text>
                   <View style={{ flexDirection: "row" }}>
                     <Text style={styles.price}>
@@ -126,8 +125,7 @@ const CartItem = memo(
                   {title.length > 35 ? title.substring(0, 34) + "..." : title}
                 </Text>
                 <Text style={styles.select}>
-                  Color - [ {items[0].selectedColor} ] & Size - [{" "}
-                  {items[0].selectedSize} ]
+                  Color - [ {items[0].color} ] & Size - [ {items[0].size} ]
                 </Text>
                 <View style={{ flexDirection: "row" }}>
                   <Text style={styles.price}>
